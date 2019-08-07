@@ -75,10 +75,28 @@ const actions = {
             case pieces.wBishop: case pieces.bBishop:
                 break;
             case pieces.wKnight: case pieces.bKnight:
+                dispatch('knightMove', tile);
                 break;
             case pieces.wPawn: case pieces.bPawn:
                 dispatch('pawnMove', tile);
                 break;
+        }
+    },
+    knightMove: ({state}, tile) => {
+        let white = tile.piece <= 6;
+        let positions = [
+            [-2,-1], [-2,1],
+            [-1, 2], [ 1,2],
+            [2, 1], [2,-1], [1,-2], [-1,-2]
+        ];
+        for (let pos of positions) {
+            let id = tile.index + pos[0]*12 + pos[1];
+            if (white && state.vm.$children[id].piece > 6 || state.vm.$children[id].piece === pieces.empty) {
+                state.vm.$children[id].valid = true;
+            }
+            if (!white && state.vm.$children[id].piece <= 6 || state.vm.$children[id].piece === pieces.empty) {
+                state.vm.$children[id].valid = true;
+            }
         }
     },
     pawnMove: ({state}, tile) => {
@@ -108,6 +126,20 @@ const actions = {
                     (!white && state.vm.$children[id-1].piece <= 6)
                 )
                     state.vm.$children[id-1].valid = true;
+        // move forward by 2
+        console.log(tile)
+        if (
+            (white  && tile.index >= 38 && tile.index < 46) ||
+            (!white && tile.index >= 98 && tile.index < 106)
+        ) {
+            let tmp = tile.index + (24 * side);
+            if (    // attack only enemy pieces
+                (white && state.vm.$children[tmp].piece > 6) ||
+                (!white && state.vm.$children[tmp].piece <= 6) ||
+                state.vm.$children[tmp].piece === pieces.empty
+            )
+                state.vm.$children[tmp].valid = true;
+        }
     },
     endMove: ({state}) => {
         for (let tile of state.vm.$children) {
