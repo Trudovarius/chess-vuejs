@@ -86,7 +86,7 @@ const actions = {
                 break;
         }
     },
-    kingMove: ({state}, tile) => {
+    kingMove: ({state, dispatch}, tile) => {
         let white = tile.piece <= 6;
         let positions = [
             [-1,-1], [-1, 0], [-1, 1], [ 0,-1],
@@ -94,19 +94,17 @@ const actions = {
         ];
         for (let pos of positions) {
             let id = tile.index + pos[0]*12 + pos[1];
-            if (white && state.vm.$children[id].piece > 6 || state.vm.$children[id].piece === pieces.empty) {
-                state.vm.$children[id].valid = true;
-            }
-            if (!white && state.vm.$children[id].piece <= 6 || state.vm.$children[id].piece === pieces.empty) {
-                state.vm.$children[id].valid = true;
-            }
+            dispatch('isValid', {id: id, player: white}).then(res => {
+                if (res)
+                    state.vm.$children[id].valid = true;
+            });
         }
     },
     queenMove: ({state, dispatch}, tile) => {
         dispatch('rookMove', tile);
         dispatch('bishopMove', tile);
     },
-    rookMove: ({state}, tile) => {
+    rookMove: ({state, dispatch}, tile) => {
         let white = tile.piece <= 6;
         // up
         for (let i = 1; i < 8; i++) {
@@ -114,12 +112,10 @@ const actions = {
             if (state.vm.$children[id].piece === pieces.empty) {
                 state.vm.$children[id].valid = true;
             } else {
-                if (    // attack only enemy pieces
-                    (white && state.vm.$children[id].piece > 6) ||
-                    (!white && state.vm.$children[id].piece <= 6)
-                ) {
-                    state.vm.$children[id].valid = true;
-                }
+                dispatch('isValid', {id: id, player: white}).then(res => {
+                    if (res)
+                        state.vm.$children[id].valid = true;
+                });
                 break;
             }
         }
@@ -129,12 +125,10 @@ const actions = {
             if (state.vm.$children[id].piece === pieces.empty) {
                 state.vm.$children[id].valid = true;
             } else {
-                if (    // attack only enemy pieces
-                    (white && state.vm.$children[id].piece > 6) ||
-                    (!white && state.vm.$children[id].piece <= 6)
-                ) {
-                    state.vm.$children[id].valid = true;
-                }
+                dispatch('isValid', {id: id, player: white}).then(res => {
+                    if (res)
+                        state.vm.$children[id].valid = true;
+                });
                 break;
             }
         }
@@ -144,12 +138,10 @@ const actions = {
             if (state.vm.$children[id].piece === pieces.empty) {
                 state.vm.$children[id].valid = true;
             } else {
-                if (    // attack only enemy pieces
-                    (white && state.vm.$children[id].piece > 6) ||
-                    (!white && state.vm.$children[id].piece <= 6)
-                ) {
-                    state.vm.$children[id].valid = true;
-                }
+                dispatch('isValid', {id: id, player: white}).then(res => {
+                    if (res)
+                        state.vm.$children[id].valid = true;
+                });
                 break;
             }
         }
@@ -159,17 +151,15 @@ const actions = {
             if (state.vm.$children[id].piece === pieces.empty) {
                 state.vm.$children[id].valid = true;
             } else {
-                if (    // attack only enemy pieces
-                    (white && state.vm.$children[id].piece > 6) ||
-                    (!white && state.vm.$children[id].piece <= 6)
-                ) {
-                    state.vm.$children[id].valid = true;
-                }
+                dispatch('isValid', {id: id, player: white}).then(res => {
+                    if (res)
+                        state.vm.$children[id].valid = true;
+                });
                 break;
             }
         }
     },
-    bishopMove: ({state}, tile) => {
+    bishopMove: ({state, dispatch}, tile) => {
         let white = tile.piece <= 6;
         //     up /
         for (let i = 1; i < 8; i++) {
@@ -177,12 +167,10 @@ const actions = {
             if (state.vm.$children[id].piece === pieces.empty) {
                 state.vm.$children[id].valid = true;
             } else {
-                if (    // attack only enemy pieces
-                    (white && state.vm.$children[id].piece > 6) ||
-                    (!white && state.vm.$children[id].piece <= 6)
-                ) {
-                    state.vm.$children[id].valid = true;
-                }
+                dispatch('isValid', {id: id, player: white}).then(res => {
+                    if (res)
+                        state.vm.$children[id].valid = true;
+                });
                 break;
             }
         }
@@ -192,12 +180,10 @@ const actions = {
             if (state.vm.$children[id].piece === pieces.empty) {
                 state.vm.$children[id].valid = true;
             } else {
-                if (    // attack only enemy pieces
-                    (white && state.vm.$children[id].piece > 6) ||
-                    (!white && state.vm.$children[id].piece <= 6)
-                ) {
-                    state.vm.$children[id].valid = true;
-                }
+                dispatch('isValid', {id: id, player: white}).then(res => {
+                    if (res)
+                        state.vm.$children[id].valid = true;
+                });
                 break;
             }
         }
@@ -207,12 +193,10 @@ const actions = {
             if (state.vm.$children[id].piece === pieces.empty) {
                 state.vm.$children[id].valid = true;
             } else {
-                if (    // attack only enemy pieces
-                    (white && state.vm.$children[id].piece > 6) ||
-                    (!white && state.vm.$children[id].piece <= 6)
-                ) {
-                    state.vm.$children[id].valid = true;
-                }
+                dispatch('isValid', {id: id, player: white}).then(res => {
+                    if (res)
+                        state.vm.$children[id].valid = true;
+                });
                 break;
             }
         }
@@ -222,17 +206,15 @@ const actions = {
             if (state.vm.$children[id].piece === pieces.empty) {
                 state.vm.$children[id].valid = true;
             } else {
-                if (    // attack only enemy pieces
-                    (white && state.vm.$children[id].piece > 6) ||
-                    (!white && state.vm.$children[id].piece <= 6)
-                ) {
-                    state.vm.$children[id].valid = true;
-                }
+                dispatch('isValid', {id: id, player: white}).then(res => {
+                    if (res)
+                        state.vm.$children[id].valid = true;
+                });
                 break;
             }
         }
     },
-    knightMove: ({state}, tile) => {
+    knightMove: ({state, dispatch}, tile) => {
         let white = tile.piece <= 6;
         let positions = [
             [-2,-1], [-2, 1], [-1, 2], [ 1, 2],
@@ -240,15 +222,13 @@ const actions = {
         ];
         for (let pos of positions) {
             let id = tile.index + pos[0]*12 + pos[1];
-            if (white && state.vm.$children[id].piece > 6 || state.vm.$children[id].piece === pieces.empty) {
-                state.vm.$children[id].valid = true;
-            }
-            if (!white && state.vm.$children[id].piece <= 6 || state.vm.$children[id].piece === pieces.empty) {
-                state.vm.$children[id].valid = true;
-            }
+            dispatch('isValid', {id: id, player: white}).then(res => {
+                if (res)
+                    state.vm.$children[id].valid = true;
+            });
         }
     },
-    pawnMove: ({state}, tile) => {
+    pawnMove: ({state, dispatch}, tile) => {
         let white = tile.piece <= 6;
         let side = white ? 1 : -1; // pieces.bKing = 6
         // 1,2,3,4,5,6 is white
@@ -256,38 +236,32 @@ const actions = {
 
         let id = tile.index+(12*side);
         // move forward
-        if (id < 120 && id >= 24)
-            if (state.vm.$children[id].piece === pieces.empty)
-                state.vm.$children[id].valid = true;
+        if (state.vm.$children[id].piece === pieces.empty)
+            state.vm.$children[id].valid = true;
         // attack right
-        if (id+1 < 120 && id+1 >= 24 )
-            if (state.vm.$children[id+1].piece !== pieces.empty)
-                if (    // attack only enemy pieces
-                    (white && state.vm.$children[id+1].piece > 6) ||
-                    (!white && state.vm.$children[id+1].piece <= 6)
-                )
+        if (state.vm.$children[id+1].piece !== pieces.empty)
+            dispatch('canAttack', {id: id+1, player: white}).then(res => {
+                if (res)
                     state.vm.$children[id+1].valid = true;
+            });
         // attack left
-        if (id-1 < 120 && id-1 >= 24)
-            if (state.vm.$children[id-1].piece !== pieces.empty)
-                if (    // attack only enemy pieces
-                    (white && state.vm.$children[id-1].piece > 6) ||
-                    (!white && state.vm.$children[id-1].piece <= 6)
-                )
+        if (state.vm.$children[id-1].piece !== pieces.empty)
+            dispatch('canAttack', {id: id-1, player: white}).then(res => {
+                if (res)
                     state.vm.$children[id-1].valid = true;
+            });
         // move forward by 2
-        console.log(tile)
         if (
             (white  && tile.index >= 38 && tile.index < 46) ||
             (!white && tile.index >= 98 && tile.index < 106)
         ) {
-            let tmp = tile.index + (24 * side);
+            let tmp1 = tile.index + (12 * side);
+            let tmp2 = tile.index + (24 * side);
             if (    // attack only enemy pieces
-                (white && state.vm.$children[tmp].piece > 6) ||
-                (!white && state.vm.$children[tmp].piece <= 6) ||
-                state.vm.$children[tmp].piece === pieces.empty
+                state.vm.$children[tmp1].piece === pieces.empty &&
+                state.vm.$children[tmp2].piece === pieces.empty
             )
-                state.vm.$children[tmp].valid = true;
+                state.vm.$children[tmp2].valid = true;
         }
     },
     endMove: ({state}) => {
@@ -295,6 +269,14 @@ const actions = {
             tile.valid = false;
             tile.selected = false;
         }
+    },
+    isValid: ({state}, data) => {
+        return (data.player && state.vm.$children[data.id].piece > 6) ||
+            (!data.player && state.vm.$children[data.id].piece <= 6)  ||
+            (state.vm.$children[data.id].piece === pieces.empty);
+    },
+    canAttack: ({state}, data) => {
+        return (data.player && state.vm.$children[data.id].piece > 6) || (!data.player && state.vm.$children[data.id].piece <= 6);
     },
     start: ({commit}, data) => {
         commit('setVm', data.vm);
