@@ -82,20 +82,31 @@ const actions = {
         }
     },
     pawnMove: ({state}, tile) => {
-        console.log('pawn move');
-        let side = tile.piece > 6 ? -1 : 1; // pieces.bKing = 6,   6+ is black
-            let id = tile.index+(8*side);
-            // pohyb o 1 dopredu
-            if (id < 64 && id >= 0)
-                if (state.vm.$children[id].piece === pieces.empty)
-                    state.vm.$children[id].valid = true;
-            // utok doprava
-            if (id+1 < 64 && id+1 >= 0 )
-                if (state.vm.$children[id+1].piece !== pieces.empty)
+        let white = tile.piece <= 6;
+        let side = white ? 1 : -1; // pieces.bKing = 6
+        // 1,2,3,4,5,6 is white
+        // 7,8,9,10,11,12 is black
+
+        let id = tile.index+(12*side);
+        // move forward
+        if (id < 120 && id >= 24)
+            if (state.vm.$children[id].piece === pieces.empty)
+                state.vm.$children[id].valid = true;
+        // attack right
+        if (id+1 < 120 && id+1 >= 24 )
+            if (state.vm.$children[id+1].piece !== pieces.empty)
+                if (    // attack only enemy pieces
+                    (white && state.vm.$children[id+1].piece > 6) ||
+                    (!white && state.vm.$children[id+1].piece <= 6)
+                )
                     state.vm.$children[id+1].valid = true;
-            // utok dolava
-            if (id-1 < 64 && id-1 >= 0)
-                if (state.vm.$children[id-1].piece !== pieces.empty)
+        // attack left
+        if (id-1 < 120 && id-1 >= 24)
+            if (state.vm.$children[id-1].piece !== pieces.empty)
+                if (    // attack only enemy pieces
+                    (white && state.vm.$children[id-1].piece > 6) ||
+                    (!white && state.vm.$children[id-1].piece <= 6)
+                )
                     state.vm.$children[id-1].valid = true;
     },
     endMove: ({state}) => {

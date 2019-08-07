@@ -1,6 +1,7 @@
 // FILE WITH CONSTANTS
 
 export const pieces = {
+    none:  -1,      // pomocne pole
     empty:      0,      // prazdne pole
     wKing:      1,      // biely kral
     wQueen:     2,      // biela kralovna
@@ -38,12 +39,16 @@ export const names = [
 ];
 
 export const startBoard = [
-    pieces.wRook, pieces.wKnight, pieces.wBishop, pieces.wKing, pieces.wQueen, pieces.wBishop, pieces.wKnight, pieces.wRook,
-    pieces.wPawn, pieces.wPawn,   pieces.wPawn,   pieces.wPawn, pieces.wPawn,  pieces.wPawn,   pieces.wPawn,   pieces.wPawn,
-    pieces.empty, pieces.empty,   pieces.empty,   pieces.empty, pieces.empty,  pieces.empty,   pieces.empty,   pieces.empty,
-    pieces.empty, pieces.empty,   pieces.empty,   pieces.empty, pieces.empty,  pieces.empty,   pieces.empty,   pieces.empty,
-    pieces.empty, pieces.empty,   pieces.empty,   pieces.empty, pieces.empty,  pieces.empty,   pieces.empty,   pieces.empty,
-    pieces.empty, pieces.empty,   pieces.empty,   pieces.empty, pieces.empty,  pieces.empty,   pieces.empty,   pieces.empty,
-    pieces.bPawn, pieces.bPawn,   pieces.bPawn,   pieces.bPawn, pieces.bPawn,  pieces.bPawn,   pieces.bPawn,   pieces.bPawn,
-    pieces.bRook, pieces.bKnight, pieces.bBishop, pieces.bKing, pieces.bQueen, pieces.bBishop, pieces.bKnight, pieces.bRook
+    pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none,
+    pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none,
+    pieces.none, pieces.none, pieces.wRook,    pieces.wKnight,  pieces.wBishop,  pieces.wKing,    pieces.wQueen,   pieces.wBishop,  pieces.wKnight,  pieces.wRook,    pieces.none, pieces.none,
+    pieces.none, pieces.none, pieces.wPawn,    pieces.wPawn,    pieces.wPawn,    pieces.wPawn,    pieces.wPawn,    pieces.wPawn,    pieces.wPawn,    pieces.wPawn,    pieces.none, pieces.none,
+    pieces.none, pieces.none, pieces.empty,    pieces.empty,    pieces.empty,    pieces.empty,    pieces.empty,    pieces.empty,    pieces.empty,    pieces.empty,    pieces.none, pieces.none,
+    pieces.none, pieces.none, pieces.empty,    pieces.empty,    pieces.empty,    pieces.empty,    pieces.empty,    pieces.empty,    pieces.empty,    pieces.empty,    pieces.none, pieces.none,
+    pieces.none, pieces.none, pieces.empty,    pieces.empty,    pieces.empty,    pieces.empty,    pieces.empty,    pieces.empty,    pieces.empty,    pieces.empty,    pieces.none, pieces.none,
+    pieces.none, pieces.none, pieces.empty,    pieces.empty,    pieces.empty,    pieces.empty,    pieces.empty,    pieces.empty,    pieces.empty,    pieces.empty,    pieces.none, pieces.none,
+    pieces.none, pieces.none, pieces.bPawn,    pieces.bPawn,    pieces.bPawn,    pieces.bPawn,    pieces.bPawn,    pieces.bPawn,    pieces.bPawn,    pieces.bPawn,    pieces.none, pieces.none,
+    pieces.none, pieces.none, pieces.bRook,    pieces.bKnight,  pieces.bBishop,  pieces.bKing,    pieces.bQueen,   pieces.bBishop,  pieces.bKnight,  pieces.bRook,    pieces.none, pieces.none,
+    pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none,
+    pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none, pieces.none
 ];

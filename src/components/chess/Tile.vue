@@ -3,6 +3,7 @@
          v-bind:style="{ backgroundColor: color }"
          @click="select(index)"
          :class="{valid: valid}"
+         v-if="piece !== -1"
     >
         <img v-if="!empty()" :src="getImg()"
              alt="chess figure"
