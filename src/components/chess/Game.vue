@@ -2,32 +2,27 @@
     <div>
         <h1>{{ title }}</h1>
         <app-board></app-board>
+        <app-info :onTurn="onTurn"></app-info>
     </div>
 </template>
 
 <script>
     import Board from './Board.vue';
-    import { pieces, startBoard, players } from './chess';
+    import Info from './Info.vue';
     export default {
-        props: ['active'],
         data: function() {
             return {
-                title: 'GAME XD',
-                listenerFn: 0,
-                selectedTile: undefined
-            }
-        },
-        methods: {
-            selectTile(index) {
-                this.selectedTile = index;
-                console.log(this.selectedTile);
+                title: 'GAME',
+                onTurn: this.$store.state.onTurn
             }
         },
         created: function() {
             let self = this;
+            self.$store.dispatch('setGame', this);
         },
         components: {
-            appBoard: Board
+            appBoard: Board,
+            appInfo: Info
         }
     }
 </script>

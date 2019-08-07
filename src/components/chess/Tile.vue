@@ -24,7 +24,7 @@
         methods: {
             select(index) {
                 this.selected = parseInt(this.piece) !== 0;
-                this.$store.dispatch('move', {index: index, piece: this.piece, vm: this});
+                this.$store.dispatch('move', {index: index, piece: this.piece, vm: this, valid: this.valid});
             },
             getImg() {
                 return "../../assets/img/" + names[this.piece];
