@@ -67,12 +67,16 @@ const actions = {
     highlightTiles: ({commit, dispatch}, tile) => {
         switch (tile.piece) {
             case pieces.wKing: case pieces.bKing:
+                dispatch('kingMove', tile);
                 break;
             case pieces.wQueen: case pieces.bQueen:
+                dispatch('queenMove', tile);
                 break;
             case pieces.wRook: case pieces.bRook:
+                dispatch('rookMove', tile);
                 break;
             case pieces.wBishop: case pieces.bBishop:
+                dispatch('bishopMove', tile);
                 break;
             case pieces.wKnight: case pieces.bKnight:
                 dispatch('knightMove', tile);
@@ -82,12 +86,157 @@ const actions = {
                 break;
         }
     },
+    kingMove: ({state}, tile) => {
+        let white = tile.piece <= 6;
+        let positions = [
+            [-1,-1], [-1, 0], [-1, 1], [ 0,-1],
+            [ 0, 1], [ 1,-1], [ 1, 0], [ 1, 1]
+        ];
+        for (let pos of positions) {
+            let id = tile.index + pos[0]*12 + pos[1];
+            if (white && state.vm.$children[id].piece > 6 || state.vm.$children[id].piece === pieces.empty) {
+                state.vm.$children[id].valid = true;
+            }
+            if (!white && state.vm.$children[id].piece <= 6 || state.vm.$children[id].piece === pieces.empty) {
+                state.vm.$children[id].valid = true;
+            }
+        }
+    },
+    queenMove: ({state, dispatch}, tile) => {
+        dispatch('rookMove', tile);
+        dispatch('bishopMove', tile);
+    },
+    rookMove: ({state}, tile) => {
+        let white = tile.piece <= 6;
+        // up
+        for (let i = 1; i < 8; i++) {
+            let id = tile.index + 12*i;
+            if (state.vm.$children[id].piece === pieces.empty) {
+                state.vm.$children[id].valid = true;
+            } else {
+                if (    // attack only enemy pieces
+                    (white && state.vm.$children[id].piece > 6) ||
+                    (!white && state.vm.$children[id].piece <= 6)
+                ) {
+                    state.vm.$children[id].valid = true;
+                }
+                break;
+            }
+        }
+        // down
+        for (let i = 1; i < 8; i++) {
+            let id = tile.index - 12*i;
+            if (state.vm.$children[id].piece === pieces.empty) {
+                state.vm.$children[id].valid = true;
+            } else {
+                if (    // attack only enemy pieces
+                    (white && state.vm.$children[id].piece > 6) ||
+                    (!white && state.vm.$children[id].piece <= 6)
+                ) {
+                    state.vm.$children[id].valid = true;
+                }
+                break;
+            }
+        }
+        // left
+        for (let i = 1; i < 8; i++) {
+            let id = tile.index - i;
+            if (state.vm.$children[id].piece === pieces.empty) {
+                state.vm.$children[id].valid = true;
+            } else {
+                if (    // attack only enemy pieces
+                    (white && state.vm.$children[id].piece > 6) ||
+                    (!white && state.vm.$children[id].piece <= 6)
+                ) {
+                    state.vm.$children[id].valid = true;
+                }
+                break;
+            }
+        }
+        // right
+        for (let i = 1; i < 8; i++) {
+            let id = tile.index + i;
+            if (state.vm.$children[id].piece === pieces.empty) {
+                state.vm.$children[id].valid = true;
+            } else {
+                if (    // attack only enemy pieces
+                    (white && state.vm.$children[id].piece > 6) ||
+                    (!white && state.vm.$children[id].piece <= 6)
+                ) {
+                    state.vm.$children[id].valid = true;
+                }
+                break;
+            }
+        }
+    },
+    bishopMove: ({state}, tile) => {
+        let white = tile.piece <= 6;
+        //     up /
+        for (let i = 1; i < 8; i++) {
+            let id = tile.index - 12*i + i;
+            if (state.vm.$children[id].piece === pieces.empty) {
+                state.vm.$children[id].valid = true;
+            } else {
+                if (    // attack only enemy pieces
+                    (white && state.vm.$children[id].piece > 6) ||
+                    (!white && state.vm.$children[id].piece <= 6)
+                ) {
+                    state.vm.$children[id].valid = true;
+                }
+                break;
+            }
+        }
+        // down \
+        for (let i = 1; i < 8; i++) {
+            let id = tile.index + 12*i + i;
+            if (state.vm.$children[id].piece === pieces.empty) {
+                state.vm.$children[id].valid = true;
+            } else {
+                if (    // attack only enemy pieces
+                    (white && state.vm.$children[id].piece > 6) ||
+                    (!white && state.vm.$children[id].piece <= 6)
+                ) {
+                    state.vm.$children[id].valid = true;
+                }
+                break;
+            }
+        }
+        // down /
+        for (let i = 1; i < 8; i++) {
+            let id = tile.index +12*i - i;
+            if (state.vm.$children[id].piece === pieces.empty) {
+                state.vm.$children[id].valid = true;
+            } else {
+                if (    // attack only enemy pieces
+                    (white && state.vm.$children[id].piece > 6) ||
+                    (!white && state.vm.$children[id].piece <= 6)
+                ) {
+                    state.vm.$children[id].valid = true;
+                }
+                break;
+            }
+        }
+        // up \
+        for (let i = 1; i < 8; i++) {
+            let id = tile.index -12*i - i;
+            if (state.vm.$children[id].piece === pieces.empty) {
+                state.vm.$children[id].valid = true;
+            } else {
+                if (    // attack only enemy pieces
+                    (white && state.vm.$children[id].piece > 6) ||
+                    (!white && state.vm.$children[id].piece <= 6)
+                ) {
+                    state.vm.$children[id].valid = true;
+                }
+                break;
+            }
+        }
+    },
     knightMove: ({state}, tile) => {
         let white = tile.piece <= 6;
         let positions = [
-            [-2,-1], [-2,1],
-            [-1, 2], [ 1,2],
-            [2, 1], [2,-1], [1,-2], [-1,-2]
+            [-2,-1], [-2, 1], [-1, 2], [ 1, 2],
+            [ 2, 1], [ 2,-1], [ 1,-2], [-1,-2]
         ];
         for (let pos of positions) {
             let id = tile.index + pos[0]*12 + pos[1];
