@@ -73,6 +73,7 @@ export default new Vuex.Store({
             userId: res.data.localId
           });
           dispatch('setLogoutTimer', res.data.expiresIn);
+          router.push('/chess');
         })
         .catch(error => console.log(error));
     },
@@ -91,6 +92,7 @@ export default new Vuex.Store({
         token: token,
         userId: userId
       });
+      router.push('/chess');
     },
     logout({commit}) {
       commit('clearAuthData');

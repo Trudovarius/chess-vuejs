@@ -95,8 +95,7 @@ const actions = {
         for (let pos of positions) {
             let id = tile.index + pos[0]*12 + pos[1];
             dispatch('isValid', {id: id, player: white}).then(res => {
-                if (res)
-                    state.vm.$children[id].valid = true;
+                state.vm.$children[id].valid = res;
             });
         }
     },
@@ -113,8 +112,7 @@ const actions = {
                 state.vm.$children[id].valid = true;
             } else {
                 dispatch('isValid', {id: id, player: white}).then(res => {
-                    if (res)
-                        state.vm.$children[id].valid = true;
+                    state.vm.$children[id].valid = res;
                 });
                 break;
             }
@@ -126,8 +124,7 @@ const actions = {
                 state.vm.$children[id].valid = true;
             } else {
                 dispatch('isValid', {id: id, player: white}).then(res => {
-                    if (res)
-                        state.vm.$children[id].valid = true;
+                    state.vm.$children[id].valid = res;
                 });
                 break;
             }
@@ -139,8 +136,7 @@ const actions = {
                 state.vm.$children[id].valid = true;
             } else {
                 dispatch('isValid', {id: id, player: white}).then(res => {
-                    if (res)
-                        state.vm.$children[id].valid = true;
+                    state.vm.$children[id].valid = res;
                 });
                 break;
             }
@@ -152,8 +148,7 @@ const actions = {
                 state.vm.$children[id].valid = true;
             } else {
                 dispatch('isValid', {id: id, player: white}).then(res => {
-                    if (res)
-                        state.vm.$children[id].valid = true;
+                    state.vm.$children[id].valid = res;
                 });
                 break;
             }
@@ -168,8 +163,7 @@ const actions = {
                 state.vm.$children[id].valid = true;
             } else {
                 dispatch('isValid', {id: id, player: white}).then(res => {
-                    if (res)
-                        state.vm.$children[id].valid = true;
+                    state.vm.$children[id].valid = res;
                 });
                 break;
             }
@@ -181,8 +175,7 @@ const actions = {
                 state.vm.$children[id].valid = true;
             } else {
                 dispatch('isValid', {id: id, player: white}).then(res => {
-                    if (res)
-                        state.vm.$children[id].valid = true;
+                    state.vm.$children[id].valid = res;
                 });
                 break;
             }
@@ -194,8 +187,7 @@ const actions = {
                 state.vm.$children[id].valid = true;
             } else {
                 dispatch('isValid', {id: id, player: white}).then(res => {
-                    if (res)
-                        state.vm.$children[id].valid = true;
+                    state.vm.$children[id].valid = res;
                 });
                 break;
             }
@@ -207,8 +199,7 @@ const actions = {
                 state.vm.$children[id].valid = true;
             } else {
                 dispatch('isValid', {id: id, player: white}).then(res => {
-                    if (res)
-                        state.vm.$children[id].valid = true;
+                    state.vm.$children[id].valid = res;
                 });
                 break;
             }
@@ -223,8 +214,7 @@ const actions = {
         for (let pos of positions) {
             let id = tile.index + pos[0]*12 + pos[1];
             dispatch('isValid', {id: id, player: white}).then(res => {
-                if (res)
-                    state.vm.$children[id].valid = true;
+                state.vm.$children[id].valid = res;
             });
         }
     },
@@ -241,14 +231,12 @@ const actions = {
         // attack right
         if (state.vm.$children[id+1].piece !== pieces.empty)
             dispatch('canAttack', {id: id+1, player: white}).then(res => {
-                if (res)
-                    state.vm.$children[id+1].valid = true;
+                state.vm.$children[id+1].valid = res;
             });
         // attack left
         if (state.vm.$children[id-1].piece !== pieces.empty)
             dispatch('canAttack', {id: id-1, player: white}).then(res => {
-                if (res)
-                    state.vm.$children[id-1].valid = true;
+                state.vm.$children[id-1].valid = res;
             });
         // move forward by 2
         if (

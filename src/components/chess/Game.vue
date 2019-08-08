@@ -17,7 +17,7 @@
     export default {
         data: function() {
             return {
-                title: 'GAME',
+                title: 'CHESS VUE JS',
                 onTurn: this.$store.state.onTurn
             }
         },

@@ -32,8 +32,7 @@ html {
       font-size: 75%; } }
 
 body {
-  box-sizing: border-box;
-  padding: 3rem; }
+  box-sizing: border-box; }
   @media (max-width: 56.25em) {
     body {
       padding: 0; } }
@@ -86,6 +85,8 @@ body {
     background: radial-gradient(circle, #f24cf7 15%, rgba(238, 207, 240, 0) 67%, rgba(204, 177, 210, 0) 100%, #020024 255%, rgba(0, 212, 255, 0) 255%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f24cf7",endColorstr="#00d4ff",GradientType=1);
     cursor: pointer; }
+  .tile__selected {
+    outline: 3px solid orangered; }
   .tile__valid {
     z-index: 69;
     background: #4bfa44;
