@@ -106,104 +106,24 @@ const actions = {
     rookMove: ({state, dispatch}, tile) => {
         let white = tile.piece <= 6;
         // up
-        for (let i = 1; i < 8; i++) {
-            let id = tile.index + 12*i;
-            if (state.vm.$children[id].piece === pieces.empty) {
-                state.vm.$children[id].valid = true;
-            } else {
-                dispatch('isValid', {id: id, player: white}).then(res => {
-                    state.vm.$children[id].valid = res;
-                });
-                break;
-            }
-        }
+        dispatch('loopDirection', {tile: tile, white: white, modifier: (i) => { return 12*i}});
         // down
-        for (let i = 1; i < 8; i++) {
-            let id = tile.index - 12*i;
-            if (state.vm.$children[id].piece === pieces.empty) {
-                state.vm.$children[id].valid = true;
-            } else {
-                dispatch('isValid', {id: id, player: white}).then(res => {
-                    state.vm.$children[id].valid = res;
-                });
-                break;
-            }
-        }
+        dispatch('loopDirection', {tile: tile, white: white, modifier: (i) => { return -12*i}});
         // left
-        for (let i = 1; i < 8; i++) {
-            let id = tile.index - i;
-            if (state.vm.$children[id].piece === pieces.empty) {
-                state.vm.$children[id].valid = true;
-            } else {
-                dispatch('isValid', {id: id, player: white}).then(res => {
-                    state.vm.$children[id].valid = res;
-                });
-                break;
-            }
-        }
+        dispatch('loopDirection', {tile: tile, white: white, modifier: (i) => { return -i}});
         // right
-        for (let i = 1; i < 8; i++) {
-            let id = tile.index + i;
-            if (state.vm.$children[id].piece === pieces.empty) {
-                state.vm.$children[id].valid = true;
-            } else {
-                dispatch('isValid', {id: id, player: white}).then(res => {
-                    state.vm.$children[id].valid = res;
-                });
-                break;
-            }
-        }
+        dispatch('loopDirection', {tile: tile, white: white, modifier: (i) => { return i}});
     },
     bishopMove: ({state, dispatch}, tile) => {
         let white = tile.piece <= 6;
         //     up /
-        for (let i = 1; i < 8; i++) {
-            let id = tile.index - 12*i + i;
-            if (state.vm.$children[id].piece === pieces.empty) {
-                state.vm.$children[id].valid = true;
-            } else {
-                dispatch('isValid', {id: id, player: white}).then(res => {
-                    state.vm.$children[id].valid = res;
-                });
-                break;
-            }
-        }
+        dispatch('loopDirection', {tile: tile, white: white, modifier: (i) => { return - 12*i + i}});
         // down \
-        for (let i = 1; i < 8; i++) {
-            let id = tile.index + 12*i + i;
-            if (state.vm.$children[id].piece === pieces.empty) {
-                state.vm.$children[id].valid = true;
-            } else {
-                dispatch('isValid', {id: id, player: white}).then(res => {
-                    state.vm.$children[id].valid = res;
-                });
-                break;
-            }
-        }
+        dispatch('loopDirection', {tile: tile, white: white, modifier: (i) => { return 12*i + i}});
         // down /
-        for (let i = 1; i < 8; i++) {
-            let id = tile.index +12*i - i;
-            if (state.vm.$children[id].piece === pieces.empty) {
-                state.vm.$children[id].valid = true;
-            } else {
-                dispatch('isValid', {id: id, player: white}).then(res => {
-                    state.vm.$children[id].valid = res;
-                });
-                break;
-            }
-        }
+        dispatch('loopDirection', {tile: tile, white: white, modifier: (i) => { return 12*i - i}});
         // up \
-        for (let i = 1; i < 8; i++) {
-            let id = tile.index -12*i - i;
-            if (state.vm.$children[id].piece === pieces.empty) {
-                state.vm.$children[id].valid = true;
-            } else {
-                dispatch('isValid', {id: id, player: white}).then(res => {
-                    state.vm.$children[id].valid = res;
-                });
-                break;
-            }
-        }
+        dispatch('loopDirection', {tile: tile, white: white, modifier: (i) => { return - 12*i - i}});
     },
     knightMove: ({state, dispatch}, tile) => {
         let white = tile.piece <= 6;
@@ -265,6 +185,19 @@ const actions = {
     },
     canAttack: ({state}, data) => {
         return (data.player && state.vm.$children[data.id].piece > 6) || (!data.player && state.vm.$children[data.id].piece <= 6);
+    },
+    loopDirection: ({state, dispatch}, data) => {
+        for (let i = 1; i < 8; i++) {
+            let id = data.tile.index + data.modifier(i); // - 12*i - i;
+            if (state.vm.$children[id].piece === pieces.empty) {
+                state.vm.$children[id].valid = true;
+            } else {
+                dispatch('isValid', {id: id, player: data.white}).then(res => {
+                    state.vm.$children[id].valid = res;
+                });
+                break;
+            }
+        }
     },
     start: ({commit}, data) => {
         commit('setVm', data.vm);
