@@ -1,12 +1,14 @@
 <template>
-    <div class="board">
-        <div class="fields">
-            <app-tile v-for="(tile, index) in tiles"
-                      :key="index"
-                      :color="getColor(index)"
-                      :piece="tile"
-                      :index="index"
-            ></app-tile>
+    <div>
+        <div class="chess__board">
+            <div class="chess__fields">
+                <app-tile v-for="(tile, index) in tiles"
+                          :key="index"
+                          :color="getColor(index)"
+                          :piece="tile"
+                          :index="index"
+                ></app-tile>
+            </div>
         </div>
     </div>
 </template>
@@ -57,22 +59,5 @@
 </script>
 
 <style>
-    .board {
-        width: 40%;
-        padding-top: 40%;
-        margin: auto;
-        background: gray;
-        position: relative;
-    }
-
-    .fields {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        padding-top: 4%;
-        padding-left: 4%;
-    }
 
 </style>

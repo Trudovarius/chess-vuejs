@@ -1,8 +1,13 @@
 <template>
     <div>
-        <h1>{{ title }}</h1>
-        <app-board></app-board>
-        <app-info :onTurn="onTurn"></app-info>
+        <div class="row">
+            <h1>{{ title }}</h1>
+        </div>
+        <hr>
+        <div class="row">
+            <app-info :onTurn="onTurn" class="col-1-of-3"></app-info>
+            <app-board class="col-2-of-3"></app-board>
+        </div>
     </div>
 </template>
 

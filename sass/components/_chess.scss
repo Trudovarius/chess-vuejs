@@ -1,0 +1,22 @@
+.chess {
+  &__board {
+    background: gray;
+    padding-bottom: 5%;
+    width: 100%;
+    overflow:hidden;
+
+    @include clearfix;
+  }
+
+  &__fields {
+    width: 90%;
+    height: 90%;
+    margin: 5%;
+  }
+
+  &__info {
+    @include clearfix;
+    background: gray;
+    width: 100%;
+  }
+}

@@ -1,0 +1,39 @@
+.tile {
+  width: 12.5%;
+  float: left;
+  color: orangered;
+  cursor: pointer;
+  padding-top: 12.5%;
+  position: relative;
+
+  @include clearfix;
+
+  & img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 80%;
+    margin: 10%;
+    background: rgb(242,76,247);
+    background: -moz-radial-gradient(circle, rgba(242,76,247,1) 15%, rgba(238,207,240,0) 67%, rgba(204,177,210,0) 100%, rgba(2,0,36,1) 255%, rgba(0,212,255,0) 255%);
+    background: -webkit-radial-gradient(circle, rgba(242,76,247,1) 15%, rgba(238,207,240,0) 67%, rgba(204,177,210,0) 100%, rgba(2,0,36,1) 255%, rgba(0,212,255,0) 255%);
+    background: radial-gradient(circle, rgba(242,76,247,1) 15%, rgba(238,207,240,0) 67%, rgba(204,177,210,0) 100%, rgba(2,0,36,1) 255%, rgba(0,212,255,0) 255%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f24cf7",endColorstr="#00d4ff",GradientType=1);
+    cursor: pointer;
+  }
+
+  &__selected {
+    //outline: 3px solid orangered;
+  }
+
+  &__valid {
+    z-index: 69;
+    background: rgb(75,250,68);
+    background: -moz-radial-gradient(circle, rgba(75,250,68,1) 0%, rgba(2,0,36,0) 70%, rgba(2,0,36,1) 255%, rgba(121,12,9,1) 255%, rgba(0,212,255,0) 255%);
+    background: -webkit-radial-gradient(circle, rgba(75,250,68,1) 0%, rgba(2,0,36,0) 70%, rgba(2,0,36,1) 255%, rgba(121,12,9,1) 255%, rgba(0,212,255,0) 255%);
+    background: radial-gradient(circle, rgba(75,250,68,1) 0%, rgba(2,0,36,0) 70%, rgba(2,0,36,1) 255%, rgba(121,12,9,1) 255%, rgba(0,212,255,0) 255%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#4bfa44",endColorstr="#00d4ff",GradientType=1);
+  }
+}

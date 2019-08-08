@@ -1,0 +1,136 @@
+/*
+0    - 600px:		phone
+600  - 900px:		tablet portrait
+900  - 1200px:		tablet landscape
+1200 - 1800px:		normal style
+1800px +:			big desktop
+
+$breakpoint argument choices:
+- phone
+- tab-port
+- tab-land
+- big-desk
+
+ORDER: Base + typography > general layout + grid > page layout > components
+
+1em = 16px
+*/
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; }
+
+html {
+  font-size: 62.5%; }
+  @media (max-width: 75em) {
+    html {
+      font-size: 56.25%; } }
+  @media (min-width: 112.5em) {
+    html {
+      font-size: 75%; } }
+
+body {
+  box-sizing: border-box;
+  padding: 3rem; }
+  @media (max-width: 56.25em) {
+    body {
+      padding: 0; } }
+
+.chess__board {
+  background: gray;
+  padding-bottom: 5%;
+  width: 100%;
+  overflow: hidden; }
+  .chess__board::after {
+    content: "";
+    display: table;
+    clear: both; }
+
+.chess__fields {
+  width: 90%;
+  height: 90%;
+  margin: 5%; }
+
+.chess__info {
+  background: gray;
+  width: 100%; }
+  .chess__info::after {
+    content: "";
+    display: table;
+    clear: both; }
+
+.tile {
+  width: 12.5%;
+  float: left;
+  color: orangered;
+  cursor: pointer;
+  padding-top: 12.5%;
+  position: relative; }
+  .tile::after {
+    content: "";
+    display: table;
+    clear: both; }
+  .tile img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 80%;
+    margin: 10%;
+    background: #f24cf7;
+    background: -moz-radial-gradient(circle, #f24cf7 15%, rgba(238, 207, 240, 0) 67%, rgba(204, 177, 210, 0) 100%, #020024 255%, rgba(0, 212, 255, 0) 255%);
+    background: -webkit-radial-gradient(circle, #f24cf7 15%, rgba(238, 207, 240, 0) 67%, rgba(204, 177, 210, 0) 100%, #020024 255%, rgba(0, 212, 255, 0) 255%);
+    background: radial-gradient(circle, #f24cf7 15%, rgba(238, 207, 240, 0) 67%, rgba(204, 177, 210, 0) 100%, #020024 255%, rgba(0, 212, 255, 0) 255%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f24cf7",endColorstr="#00d4ff",GradientType=1);
+    cursor: pointer; }
+  .tile__valid {
+    z-index: 69;
+    background: #4bfa44;
+    background: -moz-radial-gradient(circle, #4bfa44 0%, rgba(2, 0, 36, 0) 70%, #020024 255%, #790c09 255%, rgba(0, 212, 255, 0) 255%);
+    background: -webkit-radial-gradient(circle, #4bfa44 0%, rgba(2, 0, 36, 0) 70%, #020024 255%, #790c09 255%, rgba(0, 212, 255, 0) 255%);
+    background: radial-gradient(circle, #4bfa44 0%, rgba(2, 0, 36, 0) 70%, #020024 255%, #790c09 255%, rgba(0, 212, 255, 0) 255%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#4bfa44",endColorstr="#00d4ff",GradientType=1); }
+
+.row {
+  max-width: 114rem;
+  margin: 0 auto; }
+  .row:not(:last-child) {
+    margin-bottom: 8rem; }
+    @media (max-width: 56.25em) {
+      .row:not(:last-child) {
+        margin-bottom: 6rem; } }
+  @media (max-width: 56.25em) {
+    .row {
+      max-width: 50rem;
+      padding: 0 3rem; } }
+  .row::after {
+    content: "";
+    display: table;
+    clear: both; }
+  .row [class^="col-"] {
+    float: left;
+    overflow: hidden; }
+    .row [class^="col-"]:not(:last-child) {
+      margin-right: 6rem; }
+      @media (max-width: 56.25em) {
+        .row [class^="col-"]:not(:last-child) {
+          margin-right: 0;
+          margin-bottom: 6rem; } }
+    @media (max-width: 56.25em) {
+      .row [class^="col-"] {
+        width: 100% !important; } }
+  .row .col-1-of-2 {
+    width: calc((100% - 6rem) / 2); }
+  .row .col-1-of-3 {
+    width: calc((100% - 2 * 6rem) / 3);
+    border: 1px solid red; }
+  .row .col-2-of-3 {
+    border: 1px solid green;
+    width: calc(2 * ((100% - 2 * 6rem) / 3) + 6rem); }
+  .row .col-1-of-4 {
+    width: calc((100% - 3 * 6rem) / 4); }
+  .row .col-2-of-4 {
+    width: calc(2* ((100% - 3 * 6rem) / 4) + 6rem); }

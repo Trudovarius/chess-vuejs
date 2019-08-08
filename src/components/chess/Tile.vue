@@ -2,12 +2,12 @@
     <div class="tile"
          v-bind:style="{ backgroundColor: color }"
          @click="select(index)"
-         :class="{valid: valid}"
+         :class="{tile__valid: valid}"
          v-if="piece !== -1"
     >
         <img v-if="!empty()" :src="getImg()"
              alt="chess figure"
-             :class="{selected: selected}"
+             :class="{tile__selected: selected}"
              draggable="false">
     </div>
 </template>
@@ -38,28 +38,4 @@
 </script>
 
 <style>
-    .tile {
-        width: 12%;
-        height: 12%;
-        float: left;
-        color: orangered;
-        cursor: pointer;
-    }
-
-    .tile img {
-        width: 60%;
-        height: 60%;
-        margin: 20%;
-        background-color: rgba(150,150,150,.5);
-        cursor: pointer;
-    }
-
-    .selected {
-        outline: 3px solid orangered;
-    }
-
-    .valid {
-        z-index: 69;
-        outline: 3px solid greenyellow;
-    }
 </style>
